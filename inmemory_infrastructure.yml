@@ -1,0 +1,11 @@
+- hosts: jumpbox
+  gather_facts: false
+  tasks:
+    - name: gather OS facts
+      os_server_facts:
+        cloud: ospcloud
+      register: output
+    - debug: var=output
+
+
+

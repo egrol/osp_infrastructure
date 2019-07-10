@@ -1,0 +1,41 @@
+---
+    - name: create security group rule for ping
+      os_security_group_rule:
+        cloud: mariachicloud
+        security_group: test-security-group
+        protocol: icmp
+        remote_ip_prefix: 0.0.0.0/0
+
+    - name: create security group rule for SSH
+      os_security_group_rule:
+        cloud: mariachicloud
+        security_group: test-security-group
+        protocol: tcp
+        port_range_min: 22
+        port_range_max: 22
+        remote_ip_prefix: 0.0.0.0/0
+
+    - name: create instance
+      os_server:
+        state: present
+        cloud: mariachicloud
+        name: test-instance
+        image: CentOS-7-x86_64-GenericCloud
+        key_name: mariachi-pub-key
+        timeout: 200
+        flavor: m1.small
+        network: test-network
+        auto_ip: yes
+        security_groups:
+          - test-security-group
+      register:
+        my_instance
+
+    - name: Get floating IPv4
+      debug:
+        msg: ""
+
+    - name: Get floating IPv6
+      debug:
+        msg: ""
+
