@@ -1,6 +1,3 @@
 [jumpbox]
 workstation
 
-[isolated_jumpbox]
-workstation-e3b0.rhpds.opentlc.com
-
